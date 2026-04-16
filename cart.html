@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart & Checkout - Ring4Delivery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="text-warning">🍔 Ring4Delivery</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="restaurants.html">Restaurants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cart.html">
+                            Cart <span class="badge bg-danger" id="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <h2 class="mb-4">Your Cart</h2>
+
+        <div class="row">
+            <!-- Cart Items Column -->
+            <div class="col-lg-8">
+                <div id="emptyCartMessage" class="alert alert-info" role="alert">
+                    Your cart is empty. <a href="restaurants.html">Continue shopping</a>
+                </div>
+                
+                <div id="cartItemsContainer"></div>
+            </div>
+
+            <!-- Order Summary Column -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm sticky-top" style="top: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Order Summary</h5>
+                        <hr>
+                        
+                        <div class="mb-3">
+                            <label for="restaurantSelect" class="form-label">Restaurant</label>
+                            <select id="restaurantSelect" class="form-select" disabled>
+                                <option>Select restaurant</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 pb-3 border-bottom">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">₹0</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Delivery Fee:</span>
+                                <span id="deliveryFee">₹40</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tax (5%):</span>
+                                <span id="tax">₹0</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4">
+                            <strong>Total:</strong>
+                            <strong id="total" class="text-warning">₹0</strong>
+                        </div>
+
+                        <button type="button" class="btn btn-warning w-100 fw-bold btn-lg" data-bs-toggle="modal" data-bs-target="#checkoutModal" id="checkoutBtn" disabled>
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2026 Ring4Delivery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Checkout Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delivery Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="checkoutForm">
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" id="customerName" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="customerEmail" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="customerEmail" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="customerPhone" class="form-label">Mobile Number *</label>
+                            <input type="tel" class="form-control" id="customerPhone" placeholder="10 digit number" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="deliveryAddress" class="form-label">Delivery Address *</label>
+                            <textarea class="form-control" id="deliveryAddress" rows="3" placeholder="Street, City, Postal Code" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="specialNotes" class="form-label">Special Notes</label>
+                            <textarea class="form-control" id="specialNotes" rows="2" placeholder="Any special instructions for delivery"></textarea>
+                        </div>
+
+                        <div class="alert alert-info" role="alert">
+                            <strong>Note:</strong> You will receive order confirmation via WhatsApp
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-warning fw-bold" id="placeOrderBtn">Place Order via WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center py-5">
+                    <div class="mb-3" style="font-size: 3rem;">✅</div>
+                    <h4 class="mb-3">Order Placed Successfully!</h4>
+                    <p class="text-muted mb-4">Your order has been sent to our WhatsApp. You will receive order confirmation shortly.</p>
+                    <p class="text-muted mb-4">Order ID: <strong id="orderId"></strong></p>
+                    <button type="button" class="btn btn-warning fw-bold" onclick="window.location.href='restaurants.html'">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        const successModalElement = new bootstrap.Modal(document.getElementById('successModal'));
+
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCart();
+            updateCartCount();
+
+            document.getElementById('placeOrderBtn').addEventListener('click', handlePlaceOrder);
+        });
+
+        function displayCart() {
+            const cart = getCart();
+            const container = document.getElementById('cartItemsContainer');
+            const emptyMessage = document.getElementById('emptyCartMessage');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (cart.length === 0) {
+                container.innerHTML = '';
+                emptyMessage.style.display = 'block';
+                checkoutBtn.disabled = true;
+                document.getElementById('restaurantSelect').innerHTML = '<option>No items in cart</option>';
+            } else {
+                emptyMessage.style.display = 'none';
+                checkoutBtn.disabled = false;
+                renderCartItems(cart);
+                popualteRestaurantSelect(cart);
+                updateOrderSummary(cart);
+            }
+        }
+
+        function renderCartItems(cart) {
+            const container = document.getElementById('cartItemsContainer');
+            container.innerHTML = '';
+
+            cart.forEach((cartItem, index) => {
+                const item = menus.find(m => m.id === cartItem.itemId);
+                const restaurant = restaurants.find(r => r.id === cartItem.restaurantId);
+                
+                const itemHTML = `
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="${item.image}" alt="${item.name}" class="img-fluid rounded" style="height: 120px; object-fit: cover; width: 100%;">
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>${item.name}</h6>
+                                    <p class="text-muted small mb-2">${restaurant.name}</p>
+                                    <p class="text-muted small">${cartItem.specialInstructions ? 'Notes: ' + cartItem.specialInstructions : ''}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${index}, ${cartItem.quantity - 1})">-</button>
+                                        <span class="fw-bold">${cartItem.quantity}</span>
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity(${index}, ${cartItem.quantity + 1})">+</button>
+                                    </div>
+                                    <p class="text-end fw-bold">₹${(item.price * cartItem.quantity).toFixed(2)}</p>
+                                    <button class="btn btn-sm btn-danger w-100" onclick="removeFromCart(${index})">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += itemHTML;
+            });
+        }
+
+        function popualteRestaurantSelect(cart) {
+            const restaurantSet = new Set(cart.map(item => item.restaurantId));
+            const select = document.getElementById('restaurantSelect');
+            select.innerHTML = '';
+
+            Array.from(restaurantSet).forEach(restaurantId => {
+                const restaurant = restaurants.find(r => r.id === restaurantId);
+                const option = document.createElement('option');
+                option.value = restaurantId;
+                option.textContent = restaurant.name;
+                select.appendChild(option);
+            });
+
+            if (restaurantSet.size === 1) {
+                select.value = Array.from(restaurantSet)[0];
+            }
+        }
+
+        function updateQuantity(index, newQuantity) {
+            if (newQuantity < 1) {
+                removeFromCart(index);
+                return;
+            }
+
+            const cart = getCart();
+            cart[index].quantity = newQuantity;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        function removeFromCart(index) {
+            const cart = getCart();
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        function updateOrderSummary(cart) {
+            let subtotal = 0;
+            cart.forEach(cartItem => {
+                const item = menus.find(m => m.id === cartItem.itemId);
+                subtotal += item.price * cartItem.quantity;
+            });
+
+            const deliveryFee = 40;
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + deliveryFee + tax;
+
+            document.getElementById('subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `₹${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `₹${total.toFixed(2)}`;
+        }
+
+        function handlePlaceOrder() {
+            const form = document.getElementById('checkoutForm');
+            
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const customerName = document.getElementById('customerName').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+            const deliveryAddress = document.getElementById('deliveryAddress').value;
+            const specialNotes = document.getElementById('specialNotes').value;
+
+            const cart = getCart();
+            const orderId = 'ORDER-' + Date.now();
+
+            // Generate order summary
+            let orderSummary = `*Ring4Delivery Order Confirmation*\n\n`;
+            orderSummary += `Order ID: ${orderId}\n`;
+            orderSummary += `Name: ${customerName}\n`;
+            orderSummary += `Phone: ${customerPhone}\n`;
+            orderSummary += `Address: ${deliveryAddress}\n\n`;
+            orderSummary += `*Order Details:*\n`;
+
+            let subtotal = 0;
+            cart.forEach(cartItem => {
+                const item = menus.find(m => m.id === cartItem.itemId);
+                const itemTotal = item.price * cartItem.quantity;
+                subtotal += itemTotal;
+                orderSummary += `${item.name} x${cartItem.quantity} = ₹${itemTotal.toFixed(2)}\n`;
+            });
+
+            const deliveryFee = 40;
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + deliveryFee + tax;
+
+            orderSummary += `\n*Bill Summary:*\n`;
+            orderSummary += `Subtotal: ₹${subtotal.toFixed(2)}\n`;
+            orderSummary += `Delivery Fee: ₹${deliveryFee}\n`;
+            orderSummary += `Tax (5%): ₹${tax}\n`;
+            orderSummary += `*Total: ₹${total.toFixed(2)}*\n\n`;
+
+            if (specialNotes) {
+                orderSummary += `Special Notes: ${specialNotes}\n\n`;
+            }
+
+            orderSummary += `Thank you for ordering! 🙏`;
+
+            // WhatsApp Integration - The number to send to
+            const recipientPhone = '6281407746'; // Your WhatsApp number
+            const whatsappURL = `https://wa.me/${recipientPhone}?text=${encodeURIComponent(orderSummary)}`;
+
+            // Show success modal
+            document.getElementById('orderId').textContent = orderId;
+            successModalElement.show();
+
+            // Open WhatsApp in new tab
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+            }, 1000);
+
+            // Clear cart
+            setTimeout(() => {
+                clearCart();
+                document.getElementById('checkoutForm').reset();
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

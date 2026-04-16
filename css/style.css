@@ -1,0 +1,372 @@
+/* General Styles */
+:root {
+    --primary-color: #ffc107;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+    --success-color: #28a745;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+/* Navigation */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+/* Hero Section */
+.hero-section {
+    background-attachment: fixed;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section h1 {
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Feature Cards */
+.feature-card {
+    background: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.feature-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+}
+
+/* Restaurant Cards */
+.restaurant-card {
+    border: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.restaurant-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-8px);
+}
+
+.restaurant-card img {
+    transition: transform 0.3s ease;
+}
+
+.restaurant-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Menu Cards */
+.menu-card {
+    border: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.menu-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-5px);
+}
+
+.menu-card img {
+    transition: transform 0.3s ease;
+}
+
+.menu-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Hover Effect */
+.hover-effect {
+    cursor: pointer;
+}
+
+.hover-effect:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Buttons */
+.btn-warning {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #ffb300;
+    border-color: #ffb300;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+.btn-warning:active {
+    transform: translateY(0);
+}
+
+/* Forms */
+.form-control,
+.form-select {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+/* Cards */
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Badges */
+.badge {
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Modal */
+.modal-content {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e0e0e0;
+    background-color: var(--light-color);
+}
+
+.modal-footer {
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Alerts */
+.alert {
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Sections */
+section {
+    padding: 3rem 0;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid #e0e0e0;
+    background-color: var(--dark-color);
+}
+
+footer p {
+    color: #999;
+    margin-bottom: 0;
+}
+
+/* List Group */
+.list-group-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.list-group-item:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.list-group-item:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.list-group-item.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+}
+
+.list-group-item:hover {
+    background-color: var(--light-color);
+}
+
+/* Quantity Controls */
+.btn-outline-secondary {
+    border-radius: 4px;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+}
+
+/* Search Bar */
+.form-control-lg {
+    padding: 0.875rem 1rem;
+}
+
+/* Sticky Elements */
+.sticky-top {
+    z-index: 100;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+
+    .restaurant-card,
+    .menu-card {
+        margin-bottom: 1rem;
+    }
+
+    .sticky-top {
+        position: static;
+    }
+
+    .list-group {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        min-height: 400px !important;
+    }
+
+    .hero-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .btn-lg {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Loading State */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card,
+.feature-card,
+.restaurant-card,
+.menu-card {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    footer {
+        display: none;
+    }
+
+    .card {
+        page-break-inside: avoid;
+    }
+}
